@@ -16,7 +16,7 @@
 				<div class="d-block d-lg-flex flex">
 					<ul class="p-0 w-50">
 						<li
-							v-show="Object.keys(country[0].name.nativeName).length"
+							v-if="Object.keys(country[0].name.nativeName).length"
 							class="nav-link text-start"
 						>
 							<span class="fw-bold me-2">Native Name: </span
@@ -26,36 +26,36 @@
 								].common
 							}}
 						</li>
-						<li v-show="country[0].population" class="nav-link">
+						<li v-if="country[0].population" class="nav-link">
 							<span class="fw-bold me-2">Population: </span
 							>{{ country[0].population.toLocaleString('en') }}
 						</li>
-						<li v-show="country[0].region" class="nav-link">
+						<li v-if="country[0].region" class="nav-link">
 							<span class="fw-bold me-2">Region: </span>{{ country[0].region }}
 						</li>
-						<li v-show="country[0].subregion" class="nav-link">
+						<li v-if="country[0].subregion" class="nav-link">
 							<span class="fw-bold me-2">Sub Region: </span
 							>{{ country[0].subregion }}
 						</li>
-						<li v-show="country[0].capital.length" class="nav-link">
+						<li v-if="country[0].capital.length" class="nav-link">
 							<span class="fw-bold me-2">Capital: </span
 							>{{ country[0].capital[0] }}
 						</li>
 					</ul>
 					<ul class="p-0 w-50 ms-lg-4">
-						<li v-show="country[0].tld.length" class="nav-link">
+						<li v-if="country[0].tld.length" class="nav-link">
 							<span class="fw-bold me-2">Top Level Domain:</span>
-							<span v-for="top in country[0].tld">{{ top }}</span>
+							<span>{{ country[0].tld.join(', ') }}</span>
 						</li>
 						<li
-							v-show="Object.keys(country[0].currencies).length"
+							v-if="Object.keys(country[0].currencies).length"
 							class="nav-link"
 						>
 							<span class="fw-bold me-2">Currencies: </span
 							>{{ Object.keys(country[0].currencies)[0] }}
 						</li>
 						<li
-							v-show="Object.values(country[0].languages).length"
+							v-if="Object.values(country[0].languages).length"
 							class="nav-link"
 						>
 							<span class="fw-bold me-2">Languages:</span>
@@ -65,7 +65,7 @@
 					</ul>
 				</div>
 				<div
-					v-show="borders.length"
+					v-if="borders.length"
 					class="d-lg-flex flex-wrap align-items-center"
 				>
 					<h5 class="mt-4 mt-lg-1 mb-3 me-3 fw-bold">Border Countries:</h5>
