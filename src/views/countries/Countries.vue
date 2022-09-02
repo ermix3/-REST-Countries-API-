@@ -1,18 +1,18 @@
 <template>
   <!--   filter & search Bar-->
-  <div class="container-fluid gap-5 px-3 px-md-5 pt-5">
+  <div class="container-fluid gap-5 px-2 px-sm-3 px-md-5 pt-5">
     <div class="row">
-      <div class="col-12 col-md-7 col-lg-5 my-1 my-sm-1 position-relative">
+      <div class="col-12  col-sm-6 col-lg-5 my-1 my-sm-1 position-relative">
         <i id='loop' class="fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y "></i>
         <input type="search" name="search" id="search" v-model="search"
                class="w-100 form-control shadow-sm py-3 pe-2"
                placeholder="Search for a country...">
       </div>
-      <div class="col-12 col-md-2 col-lg-5 my-1 my-sm-1"></div>
-      <div class="col-7 col-sm-7 col-md-3 col-lg-2 my-4 my-sm-1">
+      <div class="col-12  col-sm-2 col-md-3 col-lg-4 my-1 my-sm-1"></div>
+      <div class="col-6  col-sm-4 col-md-3 col-lg-3 my-4 my-sm-1">
         <select name="filter" id="filter" class="form-select p-3 shadow-sm" v-model="selected">
           <option value="" hidden selected> Filter by Region</option>
-          <option value="All" >The World Wide Countries</option>
+          <option value="All" >All Countries</option>
           <option v-for="region of regions" :value="region" > {{ region }}</option>
         </select>
       </div>
