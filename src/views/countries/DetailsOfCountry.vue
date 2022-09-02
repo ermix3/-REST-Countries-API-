@@ -64,10 +64,6 @@ export default {
     id: {
       type: String,
       required: true
-    },
-    modeColor: {
-      type: String,
-      default: 'light'
     }
   },
   setup(props) {

@@ -10,10 +10,10 @@
       </div>
       <div class="col-12 col-md-2 col-lg-5 my-1 my-sm-1"></div>
       <div class="col-7 col-sm-7 col-md-3 col-lg-2 my-4 my-sm-1">
-        <select name="filter" id="filter" class="form-select p-3 shadow-sm">
+        <select name="filter" id="filter" class="form-select p-3 shadow-sm" v-model="selected">
           <option value="" hidden selected> Filter by Region</option>
-          <option value="" @click="filterByRegion('All')">The World Wide Countries</option>
-          <option v-for="region of regions" :value="region" @click="filterByRegion(region)"> {{ region }}</option>
+          <option value="All" >The World Wide Countries</option>
+          <option v-for="region of regions" :value="region" > {{ region }}</option>
         </select>
       </div>
     </div>
@@ -22,7 +22,8 @@
   <!--  countries data-->
   <div
       class="home container-fluid d-flex flex-wrap justify-content-center justify-content-md-start justify-content-md-between gap-5 px-3 px-md-5 mt-5">
-    <div class="card shadow" v-if="countriesFiltered.length" v-for="country in countriesFiltered" :key="country.name.common">
+    <div class="card shadow" v-if="countriesFiltered.length" v-for="country in countriesFiltered"
+         :key="country.name.common">
       <img :src="country.flags.png" class="card-img-top h-50" alt="...">
       <div class="card-body text-start p-4">
         <router-link :to="{name:'Country',params:{id:country.name.common}}" class="nav-link text-dark">
@@ -41,7 +42,7 @@
 </template>
 
 <script>
-import {ref, watchEffect} from "vue";
+import {ref, watch, watchEffect} from "vue";
 import getCountries from "@/composables/getCountries";
 
 export default {
@@ -49,8 +50,9 @@ export default {
   setup() {
     let search = ref('');
     let isDone = ref(false);
-    let {countries, regions, getAllCountries, filterByRegion} = getCountries();
-    let countriesFiltered = ref([]);
+    let selected = ref('All');
+    let {countries, regions, countriesFiltered, getAllCountries, filterByRegion} = getCountries();
+
     getAllCountries();
 
     // Methods
@@ -62,8 +64,18 @@ export default {
         countriesFiltered.value = countries.value;
       }
     });
-    return {countries, countriesFiltered, search, regions, isDone, filterByRegion}
+
+    watch(selected,() => {
+      if (selected.value !== 'All') {
+        filterByRegion(selected.value);
+        isDone.value = !isDone.value
+      } else {
+        countriesFiltered.value = countries.value;
+      }
+    });
+    return {countries, countriesFiltered, search, regions, isDone, selected, filterByRegion}
   },
+
 }
 </script>
 
